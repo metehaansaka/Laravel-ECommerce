@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','AnasayfaController@index');
-Route::view('/kategori','kategori');
-Route::view('/urun','urun');
-Route::view('/sepet','sepet');
+Route::get('/kategori/{kategoriAd}','kategoriController@index')->name('kategori');
+Route::get('/urun/{urunAd}','urunController@index')->name('urun');
+Route::get('/sepet','sepetController@index')->name('sepet');
+Route::get('/odeme','odemeController@index')->name('odeme');
+Route::get('/siparis','siparisController@index')->name('siparis');
+Route::get('/siparis/{id}','siparisController@detay')->name('siparisDetay');
 
 
