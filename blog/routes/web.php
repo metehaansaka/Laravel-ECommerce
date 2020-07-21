@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/index', function () {
-    return view('welcome');
-});
+Route::get('/','AnasayfaController@index');
+Route::view('/kategori','kategori');
+Route::view('/urun','urun');
+Route::view('/sepet','sepet');
 
 

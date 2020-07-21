@@ -102,6 +102,7 @@
       <path value="$PROJECT_DIR$/blog/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/blog/vendor/fideloper/proxy" />
       <path value="$PROJECT_DIR$/blog/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/blog/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
