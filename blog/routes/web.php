@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','AnasayfaController@index');
 Route::get('/kategori/{kategoriAd}','kategoriController@index')->name('kategori');
 Route::get('/urun/{urunAd}','urunController@index')->name('urun');
+Route::post('/ara','urunController@ara')->name('urun_ara');
 Route::get('/sepet','sepetController@index')->name('sepet');
 Route::get('/odeme','odemeController@index')->name('odeme');
 Route::get('/siparis','siparisController@index')->name('siparis');
