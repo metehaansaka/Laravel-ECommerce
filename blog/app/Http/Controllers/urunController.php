@@ -15,7 +15,9 @@ class urunController extends Controller
 
     public function ara(){
         $aranan = request()->input('aranan');
-        $deger = urunModel::where('urun_adi','like',"%$aranan%")->orWhere('urun_aciklama','like',"%$aranan%")->get();
+        $deger = urunModel::where('urun_adi','like',"%$aranan%")
+            ->orWhere('urun_aciklama','like',"%$aranan%")
+            ->paginate(2);
         request()->flash();
         return view('ara',compact('deger'));
     }

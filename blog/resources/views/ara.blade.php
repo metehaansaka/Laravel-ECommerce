@@ -22,6 +22,7 @@
                     <p class="price">{{$urun->urun_fiyat}} ₺</p>
                 </div>
                 @endforeach
+            {{$deger->appends(['aranan'=>old('aranan')])->links()}}
         </div>
     </div>
     </div>

@@ -43,8 +43,8 @@
             <div class="col-md-9">
                 <div class="products bg-content">
                     Sırala
-                    <a href="#" class="btn btn-default">Çok Satanlar</a>
-                    <a href="#" class="btn btn-default">Yeni Ürünler</a>
+                    <a href="?order=cok_satanlar" class="btn btn-default">Çok Satanlar</a>
+                    <a href="?order=yeni_urunler" class="btn btn-default">Yeni Ürünler</a>
                     <hr>
                     <div class="row">
                         @foreach($urunler as $urun)
@@ -53,9 +53,10 @@
                             <p><a href="{{route('urun',$urun->slug)}}">{{$urun->urun_adi}}</a></p>
                             <p class="price">{{$urun->urun_fiyat}}₺</p>
                             <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
+                    {{request()->has('order') ? $urunler->appends(['order' => request('order')])->links() : $urunler->links()}}
                 </div>
             </div>
         </div>
