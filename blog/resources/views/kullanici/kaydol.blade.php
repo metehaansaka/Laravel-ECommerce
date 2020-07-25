@@ -7,15 +7,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Kaydol</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="#">
-
+                        <form class="form-horizontal" role="form" method="POST" action="{{route('kullanici.kaydol')}}">
+                            {{csrf_field()}}
                             <div class="form-group has-error">
-                                <label for="name" class="col-md-4 control-label">Kullanıcı Adı</label>
+                                <label for="name" class="col-md-4 control-label">Ad Soyad</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="" required autofocus>
-                                    <span class="help-block">
-                                        <strong>Kullanıcı adı boş bırakılamaz</strong>
-                                    </span>
+                                    <input id="name" type="text" class="form-control" name="ad_soyad" value="" required autofocus>
+
                                 </div>
                             </div>
 
@@ -29,7 +27,7 @@
                             <div class="form-group">
                                 <label for="password" class="col-md-4 control-label">Şifre</label>
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control" name="sifre" required>
                                 </div>
                             </div>
 

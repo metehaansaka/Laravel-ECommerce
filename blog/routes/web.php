@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','AnasayfaController@index');
+Route::get('/','AnasayfaController@index')->name('anasayfa');
 Route::get('/kategori/{kategoriAd}','kategoriController@index')->name('kategori');
 Route::get('/urun/{urunAd}','urunController@index')->name('urun');
 Route::post('/ara','urunController@ara')->name('urun_ara');
@@ -24,7 +24,8 @@ Route::get('/siparis','siparisController@index')->name('siparis');
 Route::get('/siparis/{id}','siparisController@detay')->name('siparisDetay');
 Route::group(['prefix'=>'kullanici'],function (){
     Route::get('/oturumac','kullaniciController@giris')->name('kullanici.oturumac');
-    Route::get('/kaydol','kullaniciController@kaydol')->name('kullanici.kaydol');
+    Route::get('/kaydol','kullaniciController@kaydol_form')->name('kullanici.kaydol');
+    Route::post('/kaydol','kullaniciController@kaydol');
 });
 
 
