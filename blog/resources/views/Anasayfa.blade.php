@@ -2,6 +2,9 @@
 @section('title','Anasayfa')
 @section('content')
     <div class="container">
+        @if(session()->has('mesaj'))
+            <h3>{{session('mesaj')}}</h3>
+        @endif
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-default">
