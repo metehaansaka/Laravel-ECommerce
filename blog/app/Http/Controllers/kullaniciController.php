@@ -11,8 +11,24 @@ use Illuminate\Support\Facades\Hash;
 
 class kullaniciController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('cikis');
+    }
+
     public function giris(){
         return view('kullanici.oturumac');
+    }
+
+    public function oturumac(){
+        if (auth()->attempt(['mail'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))){
+            request()->session()->regenerate();
+            return redirect()->intended('/');
+        }else{
+            $errors = ['email' => 'Hatalı Giriş'];
+            return back()->with($errors);
+        }
     }
 
     public function kaydol_form(){
@@ -37,7 +53,14 @@ class kullaniciController extends Controller
         return redirect()->route('anasayfa');
     }
 
-        public function aktivasyon($aktivasyon){
+    public function cikis(){
+        auth()->logout();
+        request()->session()->flush();
+        request()->session()->regenerate();
+        return redirect()->route('anasayfa');
+    }
+
+    public function aktivasyon($aktivasyon){
             $kullanici = kullaniciModel::where('aktivasyon',$aktivasyon)->first();
             if (!is_null($kullanici)){
                 $kullanici->aktivasyon = null;

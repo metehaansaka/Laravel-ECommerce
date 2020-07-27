@@ -16,4 +16,9 @@ class kullaniciModel extends Authenticatable
     const CREATED_AT = "oluşturulma_tarihi";
     const UPDATED_AT = 'güncelleme_tarihi';
     const DELETED_AT = 'silinme_tarihi';
+
+    public function getAuthPassword()
+    {
+        return $this->sifre;
+    }
 }

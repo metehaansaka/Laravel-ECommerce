@@ -36,7 +36,11 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Siparişlerim</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Çıkış</a></li>
+                        <li><a href="#" onclick="event.preventDefault(); document.getElementById('cikisForm').submit()">
+                                Çıkış</a></li>
+                        <form action="{{route('kullanici.cikis')}}" id="cikisForm" method="post"  style="display: none">
+                            {{csrf_field()}}
+                        </form>
                     </ul>
                 </li>
                 @endauth
