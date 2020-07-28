@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\kullaniciModel;
 use App\Mail\kullaniciMail;
+use App\Models\sepetModel;
+use App\Models\sepetUrunModel;
+use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -24,6 +27,27 @@ class kullaniciController extends Controller
     public function oturumac(){
         if (auth()->attempt(['mail'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))){
             request()->session()->regenerate();
+
+            $aktif_sepet_id = sepetModel::firstOrCreate(['kullanici_id' => auth()->id()])->id;
+            session()->put('aktif_sepet_id',$aktif_sepet_id);
+
+            if (Cart::getContent()->count()){
+                foreach (Cart::getContent() as $cartItem){
+                    sepetUrunModel::updateOrCreate(
+                        ['urun_id' => $cartItem->id, 'sepet_id' => $aktif_sepet_id],
+                        ['adet' => $cartItem->quantity, 'fiyat' => $cartItem->price, 'durum' => 'Beklemede']
+                    );
+                }
+            }
+
+            Cart::clear();
+
+            $urunler = sepetUrunModel::where('sepet_id',$aktif_sepet_id)->get();
+
+            foreach ($urunler as $urun){
+                Cart::add($urun->urun_id,$urun->urun->urun_adi,$urun->fiyat,$urun->adet,array('slug'=>$urun->urun->slug));
+            }
+
             return redirect()->intended('/');
         }else{
             $errors = ['email' => 'Hatalı Giriş'];

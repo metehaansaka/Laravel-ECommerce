@@ -21,6 +21,9 @@ Route::get('/ara','urunController@ara')->name('urun_ara');
 Route::group(['prefix'=>'sepet'],function (){
     Route::post('/ekle','sepetController@ekle')->name('sepet.ekle');
     Route::get('/','sepetController@index')->name('sepet');
+    Route::delete('/kaldir/{id}','sepetController@kaldir')->name('sepet.kaldir');
+    Route::delete('/bosalt','sepetController@bosalt')->name('sepet.bosalt');
+    Route::patch('/guncelle/{id}','sepetController@guncelle');
 });
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/odeme','odemeController@index')->name('odeme');
