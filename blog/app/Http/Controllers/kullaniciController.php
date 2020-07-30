@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\kullaniciModel;
 use App\Mail\kullaniciMail;
+use App\Models\kullaniciDetayModel;
 use App\Models\sepetModel;
 use App\Models\sepetUrunModel;
 use Cart;
@@ -28,7 +29,11 @@ class kullaniciController extends Controller
         if (auth()->attempt(['mail'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))){
             request()->session()->regenerate();
 
-            $aktif_sepet_id = sepetModel::firstOrCreate(['kullanici_id' => auth()->id()])->id;
+            $aktif_sepet_id = sepetModel::aktif_sepet_id();
+            if (is_null($aktif_sepet_id)){
+                $aktif_sepet = sepetModel::create(['kullanici_id' => auth()->id()]);
+                $aktif_sepet_id = $aktif_sepet->id;
+            }
             session()->put('aktif_sepet_id',$aktif_sepet_id);
 
             if (Cart::getContent()->count()){
@@ -72,6 +77,7 @@ class kullaniciController extends Controller
             'aktivasyon' => Str::random(60),
             'aktif' => 0
         ]);
+        $kullaniciDetay = $kullanici->kullaniciDetay()->save(new kullaniciDetayModel());
         Mail::to(request('email'))->send(new kullaniciMail($kullanici));
         auth()->login($kullanici);
         return redirect()->route('anasayfa');

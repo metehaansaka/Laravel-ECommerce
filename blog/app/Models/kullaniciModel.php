@@ -21,4 +21,8 @@ class kullaniciModel extends Authenticatable
     {
         return $this->sifre;
     }
+
+    public function kullaniciDetay(){
+        return $this->hasOne('App\Models\kullaniciDetayModel', 'kullanici_id', 'id');
+    }
 }

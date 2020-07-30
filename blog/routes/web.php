@@ -25,10 +25,11 @@ Route::group(['prefix'=>'sepet'],function (){
     Route::delete('/bosalt','sepetController@bosalt')->name('sepet.bosalt');
     Route::patch('/guncelle/{id}','sepetController@guncelle');
 });
+Route::get('/odeme','odemeController@index')->name('odeme');
+Route::post('/odeme','odemeController@odeme')->name('odemeYap');
 Route::group(['middleware'=>'auth'],function(){
-    Route::get('/odeme','odemeController@index')->name('odeme');
     Route::get('/siparis','siparisController@index')->name('siparis');
-    Route::get('/siparis/{id}','siparisController@detay')->name('siparisDetay');
+    Route::get('/siparisDetay/{id}','siparisController@detay')->name('siparisDetay');
 });
 Route::group(['prefix'=>'kullanici'],function (){
     Route::get('/oturumac','kullaniciController@giris')->name('kullanici.oturumac');
