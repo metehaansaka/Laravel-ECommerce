@@ -40,4 +40,12 @@ Route::group(['prefix'=>'kullanici'],function (){
     Route::post('/cikis','kullaniciController@cikis')->name('kullanici.cikis');
 });
 
+Route::group(['prefix' => 'yonetim' , 'namespace' => 'yonetim'],function (){
+    Route::match(['get','post'],'/','kullaniciController@oturumac')->name('yonetim.oturumac');
+    Route::get('/oturumkapat','kullaniciController@oturumkapat')->name('yonetim.oturumkapat');
+    Route::group(['middleware' => 'yonetim'],function (){
+        Route::get('/anasayfa','anasayfaController@index')->name('yonetim.anasayfa');
+    });
+});
+
 
