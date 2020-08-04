@@ -10,9 +10,9 @@
         <a href="#" class="list-group-item">Category</a>
         <a href="#" class="list-group-item">Category</a>
     </div>
-    <a href="#" class="list-group-item">
-        <span class="fa fa-fw fa-dashboard"></span> Users
-        <span class="badge badge-dark badge-pill pull-right">14</span>
+    <a href="{{route('yonetim.kullanici.liste')}}" class="list-group-item">
+        <span class="fa fa-fw fa-dashboard"></span> Kullanıcılar
+        <span class="badge badge-dark badge-pill pull-right"></span>
     </a>
     <a href="#" class="list-group-item">
         <span class="fa fa-fw fa-dashboard"></span> Orders

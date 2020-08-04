@@ -13,7 +13,7 @@
 <body>
 @include('yonetim.layouts.partials.navbar')
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 20px;">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-2 sidebar" style="margin-top: 80px;" id="sidebar">
             @include('yonetim.layouts.partials.sidebar')

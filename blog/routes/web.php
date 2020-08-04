@@ -45,6 +45,11 @@ Route::group(['prefix' => 'yonetim' , 'namespace' => 'yonetim'],function (){
     Route::get('/oturumkapat','kullaniciController@oturumkapat')->name('yonetim.oturumkapat');
     Route::group(['middleware' => 'yonetim'],function (){
         Route::get('/anasayfa','anasayfaController@index')->name('yonetim.anasayfa');
+        Route::group(['prefix' => '/kullanici'],function (){
+            Route::match(['post','get'],'/liste','kullaniciController@index')->name('yonetim.kullanici.liste');
+            Route::get('/duzenle/{id}','kullaniciController@form')->name('yonetim.kullanici.duzenle');
+            Route::get('/kaydet{id}','kullaniciController@kaydet')->name('yonetim.kullanici.kaydet');
+        });
     });
 });
 

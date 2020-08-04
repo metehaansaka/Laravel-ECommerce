@@ -11,6 +11,6 @@ class kullaniciDetayModel extends Model
     protected $guarded = [];
 
     public function kullanici(){
-        return $this->belongsTo('App/Models/kullaniciModel');
+        return $this->belongsTo('App/Models/kullaniciModel', 'kullanici_id', 'id');
     }
 }
