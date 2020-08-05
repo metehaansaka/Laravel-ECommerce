@@ -48,7 +48,16 @@ Route::group(['prefix' => 'yonetim' , 'namespace' => 'yonetim'],function (){
         Route::group(['prefix' => '/kullanici'],function (){
             Route::match(['post','get'],'/liste','kullaniciController@index')->name('yonetim.kullanici.liste');
             Route::get('/duzenle/{id}','kullaniciController@form')->name('yonetim.kullanici.duzenle');
-            Route::get('/kaydet{id}','kullaniciController@kaydet')->name('yonetim.kullanici.kaydet');
+            Route::get('/yeni','kullaniciController@form')->name('yonetim.kullanici.yeni');
+            Route::post('/kaydet{id}','kullaniciController@kaydet')->name('yonetim.kullanici.kaydet');
+            Route::get('/sil/{id}','kullaniciController@sil')->name('yonetim.kullanici.sil');
+        });
+        Route::group(['prefix' => '/kategori'],function (){
+            Route::match(['post','get'],'/liste','kategoriController@index')->name('yonetim.kategori.liste');
+            Route::get('/duzenle/{id}','kategoriController@form')->name('yonetim.kategori.duzenle');
+            Route::get('/yeni','kategoriController@form')->name('yonetim.kategori.yeni');
+            Route::post('/kaydet/{id?}','kategoriController@kaydet')->name('yonetim.kategori.kaydet');
+            Route::get('/sil/{id}','kategoriController@sil')->name('yonetim.kategori.sil');
         });
     });
 });

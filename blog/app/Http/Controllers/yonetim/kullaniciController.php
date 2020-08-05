@@ -44,7 +44,18 @@ class kullaniciController extends Controller
     }
 
     public function index(){
-        $kullanicilar = kullaniciModel::orderByDesc('oluşturulma_tarihi')->paginate(8);
+        if (\request()->filled('aranan')){
+            \request()->flash();
+            $aranan = \request('aranan');
+            $kullanicilar = kullaniciModel::where('ad_soyad','like',"%$aranan%")
+                ->orWhere('mail','like',"%$aranan%")
+                ->orderByDesc('oluşturulma_tarihi')
+                ->paginate(8)
+                ->appends('aranan',$aranan);
+        }
+        else {
+            $kullanicilar = kullaniciModel::orderByDesc('oluşturulma_tarihi')->paginate(8);
+        }
         return view('yonetim.kullanici.liste',compact('kullanicilar'));
     }
 
@@ -80,10 +91,23 @@ class kullaniciController extends Controller
         if ($id > 0){
             $kullanici = kullaniciModel::find($id);
             $kullanici->update($data);
-            kullaniciDetayModel:: where('kullanici_id',$id)->update(['adres' => \request('adres'),'telefon' => \request('telefon')]);
         }else{
             $kullanici = kullaniciModel::create($data);
         }
+        kullaniciDetayModel:: updateOrCreate(
+            [
+                'kullanici_id' => $kullanici->id
+            ],
+            [
+                'adres' => \request('adres'),
+                'telefon' => \request('telefon')
+            ]
+        );
+        return redirect()->route('yonetim.kullanici.liste');
+    }
+
+    public function sil($id){
+        kullaniciModel::destroy($id);
         return redirect()->route('yonetim.kullanici.liste');
     }
 
