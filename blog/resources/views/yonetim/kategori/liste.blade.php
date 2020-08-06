@@ -13,6 +13,15 @@
             <div class="form-group">
                 <label for="aranan">Ara</label>
                 <input type="text" name="aranan" id="aranan" class="form-control form-control-sm" placeholder="İsim..." value="{{old('aranan')}}">
+                <label for="ust_id">Üst Kategori</label>
+                <select name="ust_id" id="ust_id" class="form-control">
+                    <option value="">Seçiniz</option>
+                    @foreach($ustKategori as $uk)
+                        <option value="{{$uk->id}}" {{old('ust_id') == $uk->id ? 'selected' : ''}}>
+                            {{$uk->kategori_adi}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-success btn-sm">Ara</button>
             <a href="{{route('yonetim.kategori.liste')}}" class="btn btn-outline-primary btn-sm">Temizle</a>
@@ -23,6 +32,7 @@
             <thead class="thead-dark">
             <tr>
                 <th>#</th>
+                <th>Üst Kategori</th>
                 <th>Ad</th>
                 <th>Slug</th>
                 <th>Kayıt Tarihi</th>
@@ -33,6 +43,7 @@
             @foreach($kullanicilar as $kullanici)
             <tr>
                 <td>{{$kullanici->id}}</td>
+                <td>{{$kullanici->ust_kategori->kategori_adi}}</td>
                 <td>{{$kullanici->kategori_adi}}</td>
                 <td>{{$kullanici->slug}}</td>
                 <td>{{$kullanici->oluşturulma_tarihi}}</td>

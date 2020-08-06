@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\yonetim;
 
 use App\Http\Controllers\Controller;
+use App\kullaniciModel;
 use App\Models\kategoriModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -10,18 +11,23 @@ use Illuminate\Support\Str;
 class kategoriController extends Controller
 {
     public function index(){
-        if (\request()->filled('aranan')){
+        if (\request()->filled('aranan') || \request()->filled('ust_id')){
             \request()->flash();
             $aranan = \request('aranan');
-            $kullanicilar = kategoriModel::where('kategori_adi','like',"%$aranan%")
+            $ust_id = \request('ust_id');
+            $kullanicilar = kategoriModel::with('ust_kategori')
+                ->where('kategori_adi','like',"%$aranan%")
+                ->where('ust_id',$ust_id)
                 ->orderByDesc('oluşturulma_tarihi')
-                ->paginate(8)
-                ->appends('aranan',$aranan);
+                ->paginate(2)
+                ->appends(['aranan' => $aranan, 'ust_id' => $ust_id]);
         }
         else {
-            $kullanicilar = kategoriModel::orderByDesc('oluşturulma_tarihi')->paginate(8);
+            \request()->flush();
+            $kullanicilar = kategoriModel::with('ust_kategori')->orderByDesc('oluşturulma_tarihi')->paginate(8);
         }
-        return view('yonetim.kategori.liste',compact('kullanicilar'));
+        $ustKategori = kategoriModel::whereRaw('ust_id is null')->get();
+        return view('yonetim.kategori.liste',compact('kullanicilar','ustKategori'));
     }
 
     public function form($id = 0){

@@ -8,12 +8,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class kategoriModel extends Model
 {
     use SoftDeletes;
+
     protected $table = "kategori";
     protected $guarded = [];
+
     const CREATED_AT = "oluşturulma_tarihi";
     const UPDATED_AT = "güncelleme_tarihi";
     const DELETED_AT = "silinme_tarihi";
+
     public function urun(){
         return $this->belongsToMany('App\Models\urunModel','kategori_urun','kategori_id','urun_id');
+    }
+
+    public function ust_kategori(){
+        return $this->belongsTo('App\Models\kategoriModel','ust_id')
+            ->withDefault([
+            'kategori_adi' => 'Ana Kategori'
+        ]);
     }
 }

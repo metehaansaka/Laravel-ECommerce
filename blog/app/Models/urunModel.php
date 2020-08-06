@@ -17,6 +17,6 @@ class urunModel extends Model
         return $this->belongsToMany('App\Models\kategoriModel','kategori_urun','urun_id','kategori_id');
     }
     public function detay(){
-        return $this->hasOne('App\Models\urunDetayModel','urun_id');
+        return $this->hasOne('App\Models\urunDetayModel','urun_id','id')->withDefault();
     }
 }
