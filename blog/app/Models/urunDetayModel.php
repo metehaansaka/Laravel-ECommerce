@@ -11,6 +11,6 @@ class urunDetayModel extends Model
     public $timestamps = false;
 
     public function urun(){
-        return $this->belongsTo('App\Models\urunModel');
+        return $this->belongsTo('App\Models\urunModel','urun_id');
     }
 }

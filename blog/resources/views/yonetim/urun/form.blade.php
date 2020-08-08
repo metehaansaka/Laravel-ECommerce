@@ -1,8 +1,11 @@
 @extends('yonetim.layouts.master')
 @section('title','Ürün Form')
+@section('head')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('content')
 
-    <form action="{{route('yonetim.urun.kaydet',$kullanici->id)}}" method="post">
+    <form action="{{route('yonetim.urun.kaydet',$kullanici->id)}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="pull-right">
             <button type="submit" class="btn btn-primary ">{{$kullanici->id > 0 ? "Güncelle" : "Kaydet"}}</button>
@@ -30,10 +33,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="fiyat">Fiyat</label>
-                    <input type="text" class="form-control" name="fiyat" id="fiyat" placeholder="Açıklama" value="{{old('fiyat',$kullanici->urun_fiyat)}}">
+                    <input type="text" class="form-control" name="fiyat" id="fiyat" placeholder="Fiyat" value="{{old('fiyat',$kullanici->urun_fiyat)}}">
                 </div>
             </div>
         </div>
@@ -59,6 +62,34 @@
                 İndirimler'de Göster
             </label>
         </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="kategoriler">Kategoriler</label>
+                    <select name="kategoriler[]" id="kategoriler" class="form-control" multiple >
+                        @foreach($kategoriler as $kategori)
+                            <option value="{{$kategori->id}}" {{collect(old('kategoriler',$kategori_list))->contains($kategori->id) ? 'selected' : ''}}>
+                                {{$kategori->kategori_adi}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="urun_resmi">Resim Seç</label>
+            <input type="file" name="urun_resmi" id="urun_resmi">
+        </div>
     </form>
 
+@endsection
+@section('footer')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        $(function(){
+           $('#kategoriler').select2({
+               placeholder : "Lütfen Kategori Seçin"
+           });
+        });
+    </script>
 @endsection

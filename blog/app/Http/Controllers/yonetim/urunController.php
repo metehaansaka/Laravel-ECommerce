@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\yonetim;
 
 use App\Http\Controllers\Controller;
+use App\Models\kategoriModel;
+use App\Models\urunDetayModel;
 use App\Models\urunModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -27,10 +29,13 @@ class urunController extends Controller
 
     public function form($id = 0){
         $kullanici = new urunModel;
+        $kategori_list = [];
         if ($id>0){
             $kullanici = urunModel::find($id);
+            $kategori_list = $kullanici->kategori()->pluck('kategori_id')->all();
         }
-        return view('yonetim.urun.form',compact('kullanici'));
+        $kategoriler = kategoriModel::all();
+        return view('yonetim.urun.form',compact('kullanici','kategori_list','kategoriler'));
     }
 
     public function kaydet($id = 0){
@@ -43,6 +48,8 @@ class urunController extends Controller
         ];
 
         $data_detay = \request()->only('slider','one_cikan','cok_satan','indirimli');
+
+        $kategoriler = \request('kategoriler');
 
         if (!request()->filled('slug')){
             $data['slug'] = Str::slug(request('ad'));
@@ -57,10 +64,29 @@ class urunController extends Controller
             $kullanici = urunModel::find($id);
             $kullanici->update($data);
             $kullanici->detay()->update($data_detay);
+            $kullanici->kategori()->sync($kategoriler);
         }else{
             $kullanici = urunModel::create($data);
             $kullanici->detay()->create($data_detay);
+            $kullanici->kategori()->attach($kategoriler);
         }
+
+        if(\request()->hasFile('urun_resmi')){
+            $this->validate(\request(),[
+                'urun_resmi' => 'image|mimes:jpg,jpeg,png,gif|max:2048'
+            ]);
+            $urun_resmi = \request()->file('urun_resmi');
+            $resim_adi = $urun_resmi->hashName();
+            if ($urun_resmi->isValid()){
+                $urun_resmi->move('uploads/urunler',$resim_adi);
+
+                urunDetayModel::updateOrCreate(
+                    ['urun_id' => $kullanici->id],
+                    ['urun_resmi' => $resim_adi]
+                );
+            }
+        }
+
         return redirect()->route('yonetim.urun.duzenle',$kullanici->id);
     }
 
