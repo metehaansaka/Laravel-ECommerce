@@ -16,7 +16,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "melihovv/laravel-shopping-cart": "^7.0"
+        "melihovv/laravel-shopping-cart": "^7.0",
+        "unisharp/laravel-filemanager": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

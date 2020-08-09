@@ -27,6 +27,7 @@
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/guzzlehttp/promises" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/intervention/image" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/laravel/ui" />
@@ -106,6 +107,7 @@
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/tijsverkoyen/css-to-inline-styles" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/unisharp/laravel-filemanager" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/webmozart/assert" />

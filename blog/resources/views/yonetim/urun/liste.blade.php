@@ -23,6 +23,7 @@
             <thead class="thead-dark">
             <tr>
                 <th>#</th>
+                <th>Resim</th>
                 <th>Ürün Adı</th>
                 <th>Slug</th>
                 <th>Kayıt Tarihi</th>
@@ -33,6 +34,7 @@
             <tbody>
             @foreach($kullanicilar as $kullanici)
             <tr>
+                <td><img style="width: 120px; height: 120px;" src="{{$kullanici->detay->urun_resmi != null ? asset('uploads/urunler/'.$kullanici->detay->urun_resmi) : 'http://via.placeholder.com/120x120?text=resim'}}" alt=""></td>
                 <td>{{$kullanici->id}}</td>
                 <td>{{$kullanici->urun_adi}}</td>
                 <td>{{$kullanici->slug}}</td>

@@ -76,6 +76,9 @@
                 </div>
             </div>
         </div>
+        @if($kullanici->detay->urun_resmi != null)
+            <img src="/uploads/urunler/{{$kullanici->detay->urun_resmi}}" style="height: 100px; margin-right: 20px;" class="img-thumbnail pull-left">
+        @endif
         <div class="form-group">
             <label for="urun_resmi">Resim Seç</label>
             <input type="file" name="urun_resmi" id="urun_resmi">
@@ -85,11 +88,19 @@
 @endsection
 @section('footer')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script>
         $(function(){
            $('#kategoriler').select2({
                placeholder : "Lütfen Kategori Seçin"
            });
+            var options = {
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+            };
+           CKEDITOR.replace('aciklama',options);
         });
     </script>
 @endsection

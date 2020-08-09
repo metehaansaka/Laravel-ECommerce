@@ -53,7 +53,7 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="{{route('urun',$firsat->slug)}}">
-                            <img src="http://lorempixel.com/400/485/food/1" class="img-responsive">
+                            <img style="width: 200px; height: 200px;" src="{{$firsat->detay->urun_resmi != null ? asset('uploads/urunler/'.$firsat->detay->urun_resmi) : 'http://via.placeholder.com/400x400?text=resim'}}" class="img-responsive">
                             {{$firsat->urun_adi}}
                         </a>
                     </div>

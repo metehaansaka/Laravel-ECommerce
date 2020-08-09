@@ -39,6 +39,9 @@ Route::group(['prefix'=>'kullanici'],function (){
     Route::get('/aktiflestir/{aktivasyon}','kullaniciController@aktivasyon')->name('kullanici.aktivasyon');
     Route::post('/cikis','kullaniciController@cikis')->name('kullanici.cikis');
 });
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'yonetim']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::group(['prefix' => 'yonetim' , 'namespace' => 'yonetim'],function (){
     Route::match(['get','post'],'/','kullaniciController@oturumac')->name('yonetim.oturumac');
