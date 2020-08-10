@@ -86,7 +86,7 @@
                     <div class="row">
                         @foreach($cok_satan as $coksatan)
                         <div class="col-md-3 product">
-                            <a href="{{'urun',$coksatan->urun->slug}}"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="{{route('urun',$coksatan->urun->slug)}}"><img src="http://lorempixel.com/400/400/food/1"></a>
                             <p><a href="#">{{$coksatan->urun->urun_adi}}</a></p>
                             <p class="price">{{$coksatan->urun->urun_fiyat}} ₺</p>
                         </div>
