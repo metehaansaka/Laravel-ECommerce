@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\yonetim;
 
 use App\Http\Controllers\Controller;
-use App\kullaniciModel;
+use App\Models\kullaniciModel;
 use App\Models\kullaniciDetayModel;
 use Illuminate\Http\Request;
 use Auth;

@@ -73,7 +73,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\kullaniciModel::class,
+            'model' => App\Models\kullaniciModel::class,
         ],
 
         // 'users' => [
